@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    <title>jQuery getJSON() Method</title>
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+      
+    <!-- Script to get JSON file and display its content -->
+    <script type="text/javascript" language="javascript">
+    $(document).ready(function() {
+        $("#fetch").click(function(event) {
+            $.getJSON('wishlist/json/', function(item) {
+                for (i = 0; i < item.length; i++){
+                    $('.barangwishlist').append('<tr><td>'+ item[i].fields.nama_barang + '</td><td>' + item[i].fields.harga_barang + '</td><td>' + item[i].fields.deskripsi + '</td></tr>');
+                }
+            });
+    });
+});
+ 
+    </script>
+</head>
+
+<nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Rakhan Bar</a>
+        <button><a href="{% url 'wishlist:logout' %}">Logout</a></button>
+      </div>
+    </div>
+  </nav>
+
+
+<h5>Nama: </h5>
+<b>{{nama}}</b>
+
+<table>
+    <tr>
+    <th>Nama Barang</th>
+    <th>Harga Barang</th>
+    <th>Deskripsi</th>
+    </tr>
+    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
+    {% for barang in list_barang %}
+    <tr>
+        <th>{{barang.nama_barang}}</th>
+        <th>{{barang.harga_barang}}</th>
+        <th>{{barang.deskripsi}}</th>
+    </tr>
+{% endfor %}
+</table>
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+
+<form method="POST" action="">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>Nama Barang </td>
+            <td><input type="text" name="nama_barang" placeholder="nam" class="form-control"></td>
+        </tr>
+                
+        <tr>
+            <td>Password: </td>
+            <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td><input class="btn login_btn" type="submit" value="Login"></td>
+        </tr>
+    </table>
+</form>
+
+{% endblock content %}
+

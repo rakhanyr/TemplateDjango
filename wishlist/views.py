@@ -75,4 +75,7 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
+def ajax(request):
+    return render(request, 'ajax.html')
+
 

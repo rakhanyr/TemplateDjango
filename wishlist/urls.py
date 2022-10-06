@@ -9,6 +9,7 @@ from wishlist.views import login_user
 from wishlist.views import logout_user
 
 
+
 app_name = 'wishlist'
 
 urlpatterns = [
